@@ -1,0 +1,44 @@
+$background: #202020;
+$text-color: #b0b0b0;
+
+$border-color: $text-color;
+
+$duke: #900867;
+$assassin: #466148;
+$ambassador: #999100;
+$captain: #076273;
+$contessa: #900007;
+
+
+$action-color: #b0998d;
+
+$button-color: $text-color;
+$button-text-color: $background;
+
+
+@mixin gradient($from, $to) {
+  /* fallback/image non-cover color */
+  background-color: $from;
+
+  /* Firefox 3.6+ */
+  background-image: -moz-linear-gradient($from, $to);
+
+  /* Safari 4+, Chrome 1+ */
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop($from), color-stop($to));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background-image: -webkit-linear-gradient($from, $to);
+
+  /* Opera 11.10+ */
+  background-image: -o-linear-gradient($from, $to);
+}
+
+
+body {
+  background-color: $background;
+  color: $text-color;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
