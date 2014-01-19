@@ -8,7 +8,7 @@ module.exports = {
     files: {
       src: [
         'tmp/result/assets/**/*.css',
-        'tmp/result/index.html'
+        'tmp/result/index.xml'
       ]
     }
   },
@@ -21,7 +21,7 @@ module.exports = {
     files: {
       src: [
         'dist/**/*.css',
-        'dist/index.html'
+        'dist/index.xml'
       ]
     }
   }

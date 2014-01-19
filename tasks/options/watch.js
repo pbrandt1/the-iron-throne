@@ -5,7 +5,7 @@ var scripts = '{app,tests}/**/*.{js,coffee,em}',
     templates = 'app/templates/**/*.{hbs,handlebars,hjs,emblem}',
     sprites = 'app/sprites/**/*.{png,jpg,jpeg}',
     styles = 'app/styles/**/*.{css,sass,scss,less,styl}',
-    indexHTML = 'app/index.html',
+    indexHTML = 'app/index.xml',
     other = '{app,tests,public}/**/*';
 
 module.exports = {
