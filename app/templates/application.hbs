@@ -1,15 +1,32 @@
-<h2 id='title'>The Iron Throne</h2>
-<p class="subtitle">In the game of thrones, you either win or you die.</p>
-
-{{#if peter}}Such peter{{else}}not peter{{/if}}
+<header>
+    <h1 id='title'>The Iron Throne</h1>
+    <p class="subtitle">In the game of thrones, you either win or you die.</p>
+</header>
 
 {{outlet}}
 
 
-<div class="players">
-    <ul>
-        {{#each player}}
-            <li>*{{person.displayName}}</li>
-        {{/each}}
-    </ul>
-</div>
+<section>
+    <div class="players">
+        <ul>
+            {{#each player}}
+                <li>*{{person.displayName}}<span class="coins">{{coins}}</span><span class="roles">{{roles.length}}</span></li>
+            {{/each}}
+            <li>Robot Player<span class="coins">4</span><span class="roles">2</span></li>
+            <li>Human Player<span class="coins">1</span><span class="roles">1</span></li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <section class="assets">
+        <div class="coins">4</div>
+        <div class="roles">
+            <ul class="roles">
+                <li class="duke">Duke</li>
+                <li class="assassin">Assassin</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </section>
+</footer>

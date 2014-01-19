@@ -166,3 +166,62 @@ button {
 ul.available {
 
 }
+
+div.players {
+  .coins {
+    padding-left: 10px;
+    &:after {
+      content: " dragons";
+    }
+
+  }
+  .roles {
+    padding-left: 10px;
+    &:after {
+      content: " roles";
+    }
+  }
+}
+
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  overflow: auto;
+
+  .assets {
+    width: 100%;
+
+    .coins {
+      font-size: xx-large;
+    }
+
+    .roles {
+      li {
+        padding: 6px;
+        display: inline-block;
+        &.duke {
+          @include gradient(darken($duke, 10%), darken($duke, 20%));
+        }
+        &.assassin {
+          @include gradient(darken($assassin, 10%), darken($assassin, 20%));
+        }
+        &.ambassador {
+          @include gradient(darken($ambassador, 10%), darken($ambassador, 20%));
+        }
+        &.captain {
+          @include gradient(darken($captain, 10%), darken($captain, 20%));
+        }
+        &.contessa {
+          @include gradient(darken($contessa, 10%), darken($contessa, 20%));
+        }
+      }
+    }
+  }
+}
+
+div.clear {
+  clear: both;
+}
