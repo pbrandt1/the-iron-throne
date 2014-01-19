@@ -40,7 +40,7 @@ iframe {
 </head>
 <body>
 <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
-<iframe src="https://localhost:4343/index.html" />
+<iframe src="https://66.108.246.148:4343/index.html" />
 </body>
 </html>
         ]]>

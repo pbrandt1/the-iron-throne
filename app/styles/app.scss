@@ -42,3 +42,127 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+
+div {
+  overflow: hidden;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  &.list-choices {
+    list-style: none;
+
+    &.available {
+      li {
+        a {
+          &:hover {
+            cursor: pointer;
+            color: lighten($action-color, 10%);
+            @include gradient(lighten($background, 10%), lighten($background, 15%));
+          }
+        }
+      }
+    }
+
+    li {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      position: relative;
+
+      a {
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid $background;
+        padding: 4px 4px 4px 24px;
+        @include gradient($background, lighten($background, 5%));
+        color: $action-color;
+        &.active {
+          color: lighten($action-color, 10%);
+          @include gradient(lighten($background, 10%), lighten($background, 15%));
+        }
+        &.duke {
+          border-color: $duke;
+        }
+        &.assassin {
+          border-color: $assassin;
+        }
+        &.ambassador {
+          border-color: $ambassador
+        }
+        &.captain {
+          border-color: $captain;
+        }
+        &.contessa {
+          border-color: $contessa;
+        }
+        .icon {
+          height: 20px;
+          width: 20px;
+          padding-right: 20px;
+          float: left;
+        }
+      }
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+}
+
+.hidden {
+  display: none;
+}
+
+.icon {
+  background: url('/sprites.png') no-repeat;
+  &.duke {
+    background-position: 0 0;
+  }
+  &.assassin {
+    background-position: -50px 0;
+  }
+  &.ambassador {
+    background-position: -100px 0;
+  }
+  &.captain {
+    background-position: -150px 0;
+  }
+  &.contessa {
+    background-position: -200px 0;
+  }
+}
+
+
+/*
+  If it is your turn, the ul will have the class 'available'
+  If it is not your
+*/
+button {
+  border: none;
+  border-radius: 8px;
+  @include gradient($button-color, lighten($button-color, 10%));
+  color: $button-text-color;
+  text-shadow: 0px 2px 2px lighten($button-color, 20%);
+  font-size: 2em;
+  padding: 4px;
+  margin: 2px;
+  &:hover {
+    @include gradient(lighten($button-color, 10%), lighten($button-color, 20%));
+    color: lighten($button-text-color, 10%);
+    text-shadow: 0px 2px 2px lighten($button-color, 30%);
+    cursor: pointer;
+  }
+  &:disabled {
+    display:none;
+  }
+}
+
+ul.available {
+
+}
