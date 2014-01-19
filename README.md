@@ -1,57 +1,104 @@
-# Ember App Kit Google Hangouts Remix
+# The Iron Throne
+A google hangout game based on The Resistance: Coup.
 
-This is a starting point for ember-izing a google hangout app.  Based on Stefan Penner's [Ember App Kit](https://github.com/stefanpenner/ember-app-kit).
+## Rules
+A players turn goes like this
+1. Player states an action
+2. Player gives an opportunity for other players to challenge the Role (if any)
+3. If play continues, Player gives an opportunity for other players to block
+4. If another player blocks, Player gives the other players an opportunity to challenge the blocker’s role.
+
+### Free Actions
+* Income earns a player an (unblockable) one golden dragon from the bank
+* Foreign Aid earns a player a blockable two golden dragons from the bank
+* Coup costs seven credits but is an unblockable assassination!
+### Role Actions
+#### Role 1 [petyr baelish]
+* Can “Tax” which generates three golden dragons from the bank
+* Can block Foreign Aid
+#### Role 2 [the hound]
+* Can “Assassinate” which takes away 1 card from another player
+* cost: 3 golden dragons
+#### Role 3 [Jacquen Hagar]
+* Can “Exchange” which allows a person to exchange 0, 1, or both of their role cards.
+* Can block Stealing
+#### Role 4 [arya]
+* Can “Steal” which takes two golden dragons from another player
+* Can block Stealing
+#### Role 5 [Meslissandre, the red priest]
+* Can block Assassinate
 
 
+## Teh Codez
+A google hangout has a shared state, which means there is NO central server, but one client is crowned as “master.”  The master peer will setup the initial state of the game, but provides no other functions (note that in the final implementation, a master may not be necessary).
 
-Ember App Kit aims to be the foundation for ambitious web applications built with Ember. It's intended to be used either on its own or as the base scaffolding for projects using [Ember Tools](https://github.com/rpflorence/ember-tools), [generator-ember](https://github.com/yeoman/generator-ember) and a hypothetical official [executable](https://github.com/stefanpenner/ember-cli) at some point in the future.
+### Shared State
+When designing the shared state, make it as flat as possible to enable as granular changes as possible.  This avoids state conflicts.
 
-This project has been extracted out of several real world applications and is actively used. Currently it covers the basics fairly well, but much still needs to be done. As we learn and as more contributors join in it continues to evolve. If you encounter any bugs, clunky features or missing documentation, just submit an issue and we'll respond ASAP.
+### Possible pieces on info in the shared state
 
-At the very least, it helps setup your Ember.js applications directory structure.
+Connected Peers Turn Order
+Set by the order of “join” and in case of a tie by a random ordering provided by the master peer
+Set by the master peer in the case of a disconnect of one peer
+Current Turn
+Set: only allowed by Current Turn owner or the elected master peer in the case of the absence of the current turn owner
+Current Action
+Current Action Challenger
+Current Block
+Current Blocker
+Current Block Challenger
+Current Turn Phase
+Undeclared
+Declared
+Declaration Challenged
+Declaration Challenge - Truth
+Challenger loses role
+Declaration Challenge - Bluff
+Current turn holder loses role
+End Turn
+Declaration Succeeded
+Current turn holder pays cost
+No Block Announced
+Action effects happen
+End Turn
+Block Announced
+Block Succeeded
+End Turn
+Block Challenged
+Block Challenge - Truth
+Block challenger loses role
+End Turn
+Block Challenge - Bluff
+Action effects happen
+Blocker loses role
+End Turn
+Card Deck
+Finite deck of cards.  Dictionary of Type:Peer pairs.  Set by anyone
+Credit Bank
+Infinite.  Dictionary of Peer:Credits pairs.  Set by anyone.
+Game Status
+Created
+Started
+Completed
 
-We welcome ideas and experiments.
+### Example Three Player Game (a, b and c)
 
-## Getting Started with Google Hangouts
-* Start a Google API's project and add in the Hangouts module.
-* Set your gadget URL to https://[your ip]:4343/index.xml
-
-## Getting Started with Ember App Kit
-
-* [Project Documentation Site](http://stefanpenner.github.io/ember-app-kit/)
-* [Getting Started Guide](http://stefanpenner.github.io/ember-app-kit/guides/getting-started.html)
-* [ember-app-kit-todos](https://github.com/stefanpenner/ember-app-kit-todos) - the Emberjs [todos](http://emberjs.com/guides/getting-started/) using Ember App Kit 
-* [ember-app-kit-bloggr](https://github.com/pixelhandler/ember-app-kit-example-with-bloggr-client) - bloggr demo
-* *Safari Books Online Blog* - [Introduction to Ember App Kit](http://blog.safaribooksonline.com/2013/09/18/ember-app-kit/) for more experienced Ember developers by @mixonic
-* *Ember Sherpa* - [Introduction to Ember App Kit](http://embersherpa.com/articles/introduction-to-ember-app-kit/) for those who are new to the Grunt workflow by @taras 
-
-
-## Features
-
-- Sane project structure
-- ES6 module transpiler support (easy, future-proof modules)
-- Module system-aware resolver (see [Referencing views](https://github.com/stefanpenner/ember-app-kit/wiki/Referencing-Views) and [Using Ember loaders](https://github.com/stefanpenner/ember-app-kit/wiki/Using-Ember-loaders))
-- Transparent project compilation & minification for easy deploys via [Grunt](http://gruntjs.com/)
-- Package management via [Bower](https://github.com/bower/bower)
-- Optional support for CoffeeScript, SASS, LESS or Stylus
-- Testing via QUnit, Ember Testing and Testem (with examples)
-- Linting via JSHint (including module syntax)
-- Catch-all `index.html` for easy reloading of pushState router apps
-- Generators via [Loom](https://github.com/cavneb/loom-generators-ember-appkit) (to generate routes, controllers, etc.)
-
-## Future Goals
-
-- Source maps for transpiled modules
-- Easier to install 3rd party packages
-- Faster, more intelligent builds
-
-Think anything else is missing? Feel free to open an issue (or, even better, a PR)! Discussion and feedback is always appreciated.
-
-## Special Thanks
-
-Some ideas in ember-app-kit originated in work by Yapp Labs (@yapplabs) with McGraw-Hill Education Labs (@mhelabs) on [yapplabs/glazier](https://github.com/yapplabs/glazier). Thanks to Yapp and MHE for supporting the Ember ecosystem!
-
-## License
-
-Copyright 2013 by Stefan Penner and Ember App Kit Contributors, and licensed under the MIT License. See included
-[LICENSE](/stefanpenner/ember-app-kit/blob/master/LICENSE) file for details.
+a: true, // true: in game, false: out of game (or disconnected)
+b: false,
+c: false,
+a_id: 123123124,
+b_id: 124141251,
+c_id: 125382730,
+currentTurn: “b”,
+action: 1,
+actionChallenger: null,
+block: 2,
+blockChallenger: 12412431,
+turnStage: 9,
+a_roles: [0, 3],
+b_roles: [1],
+c_roles: [1, 2]
+a_credits: 3,
+b_credits: 5,
+c_credits: 0
+gameStatus: 1
