@@ -15,23 +15,23 @@ A players turn goes like this
 
 ### Role Actions
 
-#### Role 1 [petyr baelish]
+#### Duke [petyr baelish]
 * Can “Tax” which generates three golden dragons from the bank
 * Can block Foreign Aid
 
-#### Role 2 [the hound]
+#### Assassin [the hound]
 * Can “Assassinate” which takes away 1 card from another player
 * cost: 3 golden dragons
 
-#### Role 3 [Jacquen Hagar]
+#### Ambassador [Jacquen Hagar]
 * Can “Exchange” which allows a person to exchange 0, 1, or both of their role cards.
 * Can block Stealing
 
-#### Role 4 [arya]
+#### Captain [arya]
 * Can “Steal” which takes two golden dragons from another player
 * Can block Stealing
 
-#### Role 5 [Meslissandre, the red priest]
+#### Contessa [Meslissandre, the red priest]
 * Can block Assassinate
 
 
