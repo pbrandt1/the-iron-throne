@@ -1,26 +1,11 @@
-export default Ember.ObjectController.extend({
-  peter: true,
-  players: (function() {
-    var players = gapi.hangout.getParticipants();
-    return players;
-  })()
-});
+import Game from 'appkit/models/game';
 
-//
-///**
-// * Handle shared-state changes
-// */
-//gapi.hangout.data.onStageChanged.add(function(event) {
-//  console.log('state changed');
-//  console.log(JSON.stringify(event.state));
-//});
-//
-///**
-// * Handle new players
-// */
-//
-//
-//gapi.hangout.data.onParticipantsChanged.add(function(event) {
-//  console.log('participants changed');
-//  console.log(JSON.stringify(event.participants));
-//});
+export default Ember.ObjectController.extend({
+  game: {},
+
+  init: function() {
+    var game = Game.create();
+    this.set('game', game);
+  }
+
+});
