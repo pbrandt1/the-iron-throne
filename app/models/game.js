@@ -58,26 +58,6 @@ var Game = Ember.Object.extend({
       started: false
     });
 
-
-    /**
-    * Handle shared-state changes
-    */
-    gapi.hangout.data.onStateChanged.add(function(event) {
-      console.log('state changed');
-      console.log(JSON.stringify(event.state));
-    });
-
-    /**
-    * Handle new players
-    */
-    gapi.hangout.onParticipantsChanged.add(function(event) {
-      event.participants.forEach(function(p) {
-        if (!_.players.findBy('person.id', p.person.id)) {
-          _.players.pushObject(Player.create(p));
-        }
-      });
-    });
-
   }
 
 
