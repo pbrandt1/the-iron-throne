@@ -6,6 +6,14 @@ export default Ember.ObjectController.extend({
   init: function() {
     var game = Game.create();
     this.set('game', game);
+  },
+
+  actions: {
+    newGame: function() {
+      this.game.newGame();
+    }
   }
+
+
 
 });
