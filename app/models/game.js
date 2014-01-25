@@ -29,9 +29,9 @@ var Game = Ember.Object.extend({
   players: Em.A([]),
   state: CONSTANTS.STATE.NotStarted,
   phase: CONSTANTS.PHASE.Action,
-  activePlayer: null,
-  leader: null,
-  deck: null,
+  activePlayer: '00000', // string id
+  leader: '00000', // string id
+  deck: Em.A([]),
 
   /**
    * Create new game.  Note that the last winner is the current leader and will do this whole damn thing.
