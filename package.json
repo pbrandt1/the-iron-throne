@@ -50,6 +50,6 @@
     "loom": "~3.1.2",
     "connect-livereload": "~0.3.1",
     "grunt-sass": "~0.10.0",
-    "grunt-url-transform": "~0.1.0"
+    "grunt-url-transform": "~0.1.1"
   }
 }
