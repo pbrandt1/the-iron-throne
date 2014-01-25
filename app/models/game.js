@@ -1,14 +1,11 @@
 import Player from 'appkit/models/player';
 import CONSTANTS from 'appkit/models/constants';
 
-var GAME_PHASE = {
-  notStarted: 0,
-  undeclared: 10,
-  declared: 20,
-  declarationChallenged: 21
-};
 
-
+/**
+ * Creates the deck of roles.  Each roles is just an
+ * @returns {*|Ember.NativeArray}
+ */
 var createDeck = function() {
   var deck = Em.A([]);
   for (var i = 0; i < 15; i++) {
@@ -17,50 +14,54 @@ var createDeck = function() {
   return deck;
 };
 
+/**
+ * Gets my id from the gapi stuff
+ */
+var whoAmI = function() {
+  return 'nobody';
+};
+
+/**
+ * Wow.  Such game.  Big object.  Very so.
+ * @type {*|void|Object}
+ */
 var Game = Ember.Object.extend({
   players: Em.A([]),
-  paused: false,
-  started: false,
-  phase: null,
-  peterIsCool: true,
+  state: CONSTANTS.STATE.NotStarted,
+  phase: CONSTANTS.PHASE.Action,
+  activePlayer: null,
+  leader: null,
+  deck: null,
 
+  /**
+   * Create new game.  Note that the last winner is the current leader and will do this whole damn thing.
+   */
   newGame: function() {
-    // placeholder to check if I am the new leader
-    if ('leader' === 'leader') {
-      var deck = createDeck();
 
-      this.players.forEach(function(p) {
-        p.set('coins', 3);
-        p.set('roles', []);
-      });
-
-      // assign role cards
-      var tempPlayers = this.players.copy();
-
-      tempPlayers.forEach(function(p) {
-        var i = Math.random()*deck.length|0;
-        p.roles.push(deck.splice(i,1)[0]);
-
-        i = Math.random()*deck.length|0;
-        p.roles.push(deck.splice(i,1)[0]);
-      });
-
-      this.set('players', tempPlayers);
-    }
-
-  },
-
-  init: function() {
-    var _ = this;
-
-    _.setProperties({
-      paused: false,
-      started: false
+    // give each player 3 coins
+    this.players.forEach(function(p) {
+      p.set('coins', 3);
     });
 
+    // assign role cards
+    this.set('deck', createDeck());
+    this.players.forEach(function(p) {
+      p.roles.clear();
+      var i = Math.random()*deck.length|0;
+      p.roles.pushObject(deck.splice(i,1)[0]);
+
+      i = Math.random()*deck.length|0;
+      p.roles.pushObject(deck.splice(i,1)[0]);
+    });
+
+    // set the game state and phse
+    this.set('state', CONSTANTS.STATE.ChoosingAction);
+    this.set('phase', CONSTANTS.PHASE.Action);
+
+    // set the leader and active player equal to me!!!
+    this.set('activePlayer', whoAmI());
+    this.set('leader', whoAmI());
   }
-
-
 });
 
 export default Game;

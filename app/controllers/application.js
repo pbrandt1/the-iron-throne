@@ -16,6 +16,7 @@ export default Ember.ObjectController.extend({
     gapi.hangout.data.onStateChanged.add(function(event) {
       console.log('state changed');
       console.log(JSON.stringify(event.state));
+      // As each key of the state hashed is presented, simply just pass it off to our controller
     });
 
     /**
