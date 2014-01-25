@@ -2,7 +2,7 @@ module.exports = {
   app: {
     options: {
       default: {
-        url: 'https://66.108.246.148:4343'
+        url: 'https://localhost:4343'
       }
     },
     files: {
@@ -15,7 +15,7 @@ module.exports = {
   dist: {
     options: {
       default: {
-        url: 'https://66.108.246.148:4343'
+        url: 'https://localhost:4343'
       }
     },
     files: {
