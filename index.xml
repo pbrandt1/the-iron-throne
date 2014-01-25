@@ -1,0 +1,27 @@
+<Module>
+<!--
+
+     Licensed under the Apache License, Version 2.0 (the "License"); you may not
+     * use this file except in compliance with the License. You may obtain a copy of
+     * the License at
+     *
+     * http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+     * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+     * License for the specific language governing permissions and limitations under
+     * the License
+    
+-->
+<ModulePrefs title="Kings Landing">
+<Require feature="rpc"/>
+<Require feature="views"/>
+<Require feature="locked-domain"/>
+</ModulePrefs>
+<Content type="html">
+<![CDATA[
+<html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title>App</title> <meta name="description" content=""> <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- build:css(tmp/result) /assets/app.min.css --> <link rel="stylesheet" href="https://localhost:4343/assets/app.css"> <!-- endbuild --> <!-- build:js(tmp/result) /assets/config.min.js --> <script src="https://localhost:4343/config/environment.js"></script> <!-- @if dist=false --> <script src="https://localhost:4343/config/environments/development.js"></script> <!-- @endif --> <!-- endbuild --> <!-- build:js(tmp/result) /assets/vendor.min.js --> <script src="https://localhost:4343/vendor/jquery/jquery.js"></script> <script src="https://localhost:4343/vendor/handlebars/handlebars.js"></script> <script src="https://localhost:4343/vendor/ember/ember.js"></script> <script src="https://localhost:4343/vendor/ember-data/ember-data.js"></script> <script src="https://localhost:4343/vendor/loader.js"></script> <script src="https://localhost:4343/vendor/ember-resolver/dist/ember-resolver.js"></script> <script src="https://localhost:4343/vendor/ic-ajax/main.js"></script> <!-- endbuild --> <!-- build:js(tmp/result) /assets/app.min.js --> <script src="https://localhost:4343/assets/app.js"></script> <script src="https://localhost:4343/assets/templates.js"></script> <!-- endbuild --> </head> <body> <script src="https://plus.google.com/hangouts/_/api/v1/hangout.js"></script> <script> window.location.hash = ''; // IS THIS BAD? window.App = require('appkit/app')["default"].create(); </script> <script type="text/javascript">document.write('<script src="' + (location.protocol || 'http:') + '//' + (location.hostname || 'localhost') + ':35729/livereload.js?snipver=1" type="text/javascript"><\/script>')</script> </body> </html>
+]]>
+</Content>
+</Module>
