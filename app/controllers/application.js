@@ -19,14 +19,24 @@ export default Ember.ObjectController.extend({
     });
 
     /**
-     * Handle new players
+     * Add players when a participant opens the app
      */
-    gapi.hangout.onParticipantsChanged.add(function(event) {
+    gapi.hangout.onParticipantsEnabled.add(function(event) {
       event.participants.forEach(function(p) {
         if (!_.game.players.findBy('person.id', p.person.id)) {
           _.game.players.pushObject(Player.create(p));
         }
       });
+    });
+
+    /**
+     * Remove players when a participand disables the app
+     */
+    gapi.hangout.onParticipantsDisabled.add(function(event) {
+      event.participants.forEach(function(p) {
+        var player = _.game.players.findBy('person.id', p.person.id);
+        _.game.players.popObject(player);
+      })
     });
   },
 
