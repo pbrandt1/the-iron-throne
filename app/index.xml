@@ -104,7 +104,7 @@
 <script src="https://plus.google.com/hangouts/_/api/v1/hangout.js"></script>
 <!-- @if tests=false -->
   <script>
-    window.location.hash = ''; // IS THIS BAD?
+    window.location.hash = '';
     window.App = require('appkit/app')["default"].create();
   </script>
   <!-- @endif -->
