@@ -33,47 +33,36 @@ $button-text-color: $background;
   background-image: -o-linear-gradient($from, $to);
 }
 
+/* resets */
+h1, h2, h3, p, a, ul, ol, li, div, span, body, section, article, header, footer, input, button {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
 
 body {
   background-color: $background;
   color: $text-color;
   width: 100%;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
 }
 
-
-div {
-  overflow: hidden;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  &.list-choices {
+/* wow such module */
+.choice-list {
+  ul.choice-list {
+    width: 100%;
     list-style: none;
-
-    &.available {
-      li {
-        a {
-          &:hover {
-            cursor: pointer;
-            color: lighten($action-color, 10%);
-            @include gradient(lighten($background, 10%), lighten($background, 15%));
-          }
-        }
-      }
-    }
-
     li {
       margin: 0;
       padding: 0;
       width: 100%;
       position: relative;
-
       a {
+        &:hover {
+          cursor: pointer;
+          color: lighten($action-color, 10%);
+          @include gradient(lighten($background, 10%), lighten($background, 15%));
+        }
         display: block;
         width: 100%;
         border-bottom: 1px solid $background;
@@ -107,18 +96,15 @@ ul {
         }
       }
     }
-
-    &:last-child {
-      border: none;
-    }
   }
-
 }
 
-.hidden {
+/* state classes */
+.is-hidden {
   display: none;
 }
 
+/* sprites */
 .icon {
   background: url('/sprites.png') no-repeat;
   &.duke {
@@ -139,10 +125,7 @@ ul {
 }
 
 
-/*
-  If it is your turn, the ul will have the class 'available'
-  If it is not your
-*/
+/* button styles */
 button {
   border: none;
   border-radius: 8px;
@@ -161,10 +144,6 @@ button {
   &:disabled {
     display:none;
   }
-}
-
-ul.available {
-
 }
 
 div.players {
