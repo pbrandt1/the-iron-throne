@@ -1,45 +1,45 @@
-import Game from 'appkit/models/game';
-import Player from 'appkit/models/player';
+import SharedState from 'appkit/models/sharedState';
+import Participant from 'appkit/models/participant';
+import CONSTANTS from 'appkit/models/constants';
 
 export default Ember.ObjectController.extend({
-  game: Em.O(),
-
-  /**
-   * Returns the number of players left
-   */
-  playersLeft: function() {
-    var num = 0;
-    if (this.game.players) {
-      this.game.players.forEach(function(p) {
-        if (p.roles.length > 0) {
-          num++;
-        }
-      });
-    }
-    return num;
-  },
+  sharedState: SharedState.create({}),
+  participants: [],
+  canStartGame: function() {
+    return this.get('sharedState').state === CONSTANTS.STATE.NotStarted && this.get('participants').length > 1;
+  }.property('sharedState', 'particiapants'),
+  isStarted: function() {
+    return this.get('sharedState').state > CONSTANTS.STATE.NotStarted;
+  }.property('sharedState'),
 
   /**
    * Set up listeners with gapi
    */
   init: function() {
     var _ = this;
-    _.set('game', Game.create({}));
+
+    /**
+     * Init the participants
+     */
+    gapi.hangout.getEnabledParticipants().forEach(function(p) {
+      _.participants.pushObject(Participant.create(p));
+    });
 
     /**
      * Handle shared-state changes.  Shared state is everything in the Game model, including players.
      */
     gapi.hangout.data.onStateChanged.add(function(event) {
-      console.log('state changed');
-      console.log(JSON.stringify(event.state));
-
       // As each key of the state hashed is presented, simply update the model accordingly.
       // For complex properties like players, you have to JSON.parse it and set it that way.
-      if (typeof _.game[event.state.key] === 'TODO complex type') {
-        _.game.set(event.state.key, JSON.parse(event.state.value));
-      } else {
-        _.game.set(event.state.key, event.state.value);
-      }
+      event.addedKeys.forEach(function(key){
+        var value = typeof _.sharedState[key.key] === 'string' ? key.value : JSON.parse(key.value);
+        _.sharedState.set(key.key, value);
+      });
+
+      // I don't think i'm going to have to deal with removed keys
+      event.removedKeys.forEach(function(key) {
+        // so coool
+      });
     });
 
     /**
@@ -48,9 +48,9 @@ export default Ember.ObjectController.extend({
     gapi.hangout.onParticipantsEnabled.add(function(event) {
 
       // Always add new players with zero roles so that they do not affect current gameplay, but can join next round
-      event.participants.forEach(function(p) {
-        if (!_.game.players.findBy('person.id', p.person.id)) {
-          _.game.players.pushObject(Player.create(p));
+      event.participants && event.participants.forEach(function(p) {
+        if (!_.participants.findBy('person.id', p.person.id)) {
+          _.participants.pushObject(Participant.create(p));
         }
       });
     });
@@ -59,20 +59,10 @@ export default Ember.ObjectController.extend({
      * Remove players when a participant disables the app
      */
     gapi.hangout.onParticipantsDisabled.add(function(event) {
-      event.participants.forEach(function(p) {
-        var player = _.game.players.findBy('person.id', p.person.id);
-        _.game.players.popObject(player);
-      })
-      // TODO check for winner/gameover
-      if (_.playersLeft() <= 1) {
-        // TODO halt gameplay
-      }
+      event.participants && event.participants.forEach(function(p) {
+        var participant = _.participants.findBy('person.id', p.person.id);
+        _.participants.popObject(participant);
+      });
     });
-  },
-
-  actions: {
-    newGame: function() {
-      this.game.newGame();
-    }
   }
 });
