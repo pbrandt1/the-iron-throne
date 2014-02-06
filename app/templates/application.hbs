@@ -2,13 +2,17 @@
     <h1 id='title'>The Iron Throne</h1>
     <p class="subtitle">In the game of thrones, you either win or you die.</p>
 </header>
+{{#if debugging}}
+{{sharedState.state}}
+{{participants.length}}
+{{/if}}
 
 {{#if isStarted}}
   {{outlet}}
 {{else}}
   <section class="new-game">
       <div>
-          <button {{action 'newGame'}}>Start Game</button>
+          <button {{action 'start'}}>Start Game</button>
       </div>
   </section>
 {{/if}}
