@@ -63,6 +63,13 @@ export default Ember.ObjectController.extend({
 
       this.set('sharedState.coins', tempCoins);
       this.set('sharedState.cards', tempCards);
+
+      gapi.hangout.data.submitDelta({
+        coins: JSON.stringify(tempCoins),
+        cards: JSON.stringify(tempCards),
+        state: JSON.stringify(this.get('sharedState.state'))
+      });
+
     }
   },
 
@@ -80,7 +87,7 @@ export default Ember.ObjectController.extend({
       // As each key of the state hashed is presented, simply update the model accordingly.
       // For complex properties like players, you have to JSON.parse it and set it that way.
       event.addedKeys.forEach(function(key){
-        var value = typeof _.sharedState[key.key] === 'string' ? key.value : JSON.parse(key.value);
+        var value = typeof _.get('sharedState')[key.key] === 'string' ? key.value : JSON.parse(key.value);
         _.sharedState.set(key.key, value);
       });
 
