@@ -12,6 +12,17 @@ CONSTANTS.ROLE= {
 };
 
 /**
+ * Court roles redux
+ */
+CONSTANTS.ROLE_INVERSE= {
+  1: 'Duke',
+  2: 'Assassin',
+  3: 'Ambassador',
+  4: 'Captain',
+  5: 'Contessa'
+};
+
+/**
  * Represents the possible view states of a player's screen.
  * Note that these states look different for the active player than they do for the other players.
  *

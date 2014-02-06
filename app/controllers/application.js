@@ -12,7 +12,7 @@ export default Ember.ObjectController.extend({
 
   canStartGame: function() {
     return this.get('sharedState').state === CONSTANTS.STATE.NotStarted && this.get('participants').length > 1;
-  }.property('sharedState', 'particiapants'),
+  }.property('sharedState', 'participants'),
 
   isStarted: function() {
     return this.get('sharedState.state') > CONSTANTS.STATE.NotStarted;
@@ -26,10 +26,16 @@ export default Ember.ObjectController.extend({
     return this.get('sharedState.coins')[id] || 0;
   }.property('sharedState.coins'),
 
-  myRoles: [
-      {name: 'Duke'},
-      {name: 'Captain'}
-    ],
+  myRoles: function() {
+    var cards = this.get('sharedState.cards')[this.get('me.id')];
+
+    if (cards) {
+      return cards.map(function(c) {
+        return { name: CONSTANTS.ROLE_INVERSE[c] };
+      });
+    }
+    return [];
+  }.property('sharedState.cards').cacheable(),
 
   actions: {
     start: function() {
@@ -37,16 +43,26 @@ export default Ember.ObjectController.extend({
 
       var tempCoins = {};
       var tempCards = {};
+      var deck = [];
+      for (var i = 0; i < 15; i++) {
+        deck.push(i%5);
+      }
 
       this.get('participants').forEach(function(p) {
         // each player gets three coins
         tempCoins[p.id] = 3;
 
         // each player gets two cards
-
+        tempCards[p.id] = [];
+        tempCards[p.id].push(deck.splice(Math.random()*deck.length|0, 1)[0]);
+        tempCards[p.id].push(deck.splice(Math.random()*deck.length|0, 1)[0]);
       });
 
+      // the rest of the cards stay in the deck
+      tempCards.deck = deck;
+
       this.set('sharedState.coins', tempCoins);
+      this.set('sharedState.cards', tempCards);
     }
   },
 
