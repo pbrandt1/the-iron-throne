@@ -4,7 +4,14 @@
 </header>
 {{#if debugging}}
 {{sharedState.state}}
+{{sharedState.phase}}
+{{sharedState.currentPlayer}}
+
+{{sharedState.action}}
+{{sharedState.counterAction}}
+
 {{participants.length}}
+{{me.id}}
 {{/if}}
 
 {{#if isStarted}}
@@ -27,11 +34,14 @@
 
 <footer>
     <section class="assets">
-        <div class="coins">4</div>
-        <div class="roles">
-            <ul class="roles">
-                <li class="duke">Duke</li>
-                <li class="assassin">Assassin</li>
+        <div class="coins pull-left">
+            {{myCoins}}
+        </div>
+        <div class="roles pull-right">
+            <ul class="roles list--inline">
+                {{#each myRoles}}
+                  <li>{{name}}</li>
+                {{/each}}
             </ul>
         </div>
         <div class="clear"></div>

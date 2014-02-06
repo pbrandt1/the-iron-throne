@@ -8,8 +8,14 @@ var SharedState = Ember.Object.extend({
   coins: {}, // object key=playerId, value=coins
   action: {}, // {playerId, action}
   counterAction: {},
-  syncClock:{} // {playerId, secondsLeft}
-               // when a challenge is being discussed, we need to be able to sync the countdown clocks
+  syncClock:{}, // {playerId, secondsLeft}
+                // when a challenge is being discussed, we need to be able to sync the countdown clocks
+
+  initGame: function(participants) {
+    var _ = this;
+
+  }
+
 
 });
 

@@ -8,18 +8,49 @@ export default Ember.ObjectController.extend({
 
   sharedState: SharedState.create({}),
   participants: [],
+  me: null,
+
   canStartGame: function() {
     return this.get('sharedState').state === CONSTANTS.STATE.NotStarted && this.get('participants').length > 1;
   }.property('sharedState', 'particiapants'),
+
   isStarted: function() {
     return this.get('sharedState.state') > CONSTANTS.STATE.NotStarted;
   }.property('sharedState.state'),
 
+  /**
+   * Stats for this participant, always on-screen
+   */
+  myCoins: function() {
+    var id = this.get('me.id');
+    return this.get('sharedState.coins')[id] || 0;
+  }.property('sharedState.coins'),
+
+  myRoles: [
+      {name: 'Duke'},
+      {name: 'Captain'}
+    ],
+
   actions: {
     start: function() {
       this.set('sharedState.state', CONSTANTS.STATE.ChoosingAction);
+
+      var tempCoins = {};
+      var tempCards = {};
+
+      this.get('participants').forEach(function(p) {
+        // each player gets three coins
+        tempCoins[p.id] = 3;
+
+        // each player gets two cards
+
+      });
+
+      this.set('sharedState.coins', tempCoins);
     }
   },
+
+
 
   /**
    * Set up listeners with gapi
@@ -73,6 +104,13 @@ export default Ember.ObjectController.extend({
         var participant = _.participants.findBy('person.id', p.person.id);
         _.participants.popObject(participant);
       });
+    });
+
+    /**
+     * Finally, perform things after onready is totes set up
+     */
+    gapi.hangout.onApiReady.add(function() {
+      _.set('me', gapi.hangout.getLocalParticipant());
     });
   }
 });

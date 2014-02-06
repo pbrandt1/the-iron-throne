@@ -47,55 +47,83 @@ body {
   overflow: hidden;
 }
 
-/* wow such module */
-.choice-list {
-  ul.choice-list {
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+section, header, footer {
+  width: 100%;
+}
+
+/* wow such modules */
+.list--inline {
+  display: inline-block;
+}
+
+.list--stacked {
+  display: block;
+}
+
+.pull-left {
+  display: block;
+  float: left;
+}
+
+.pull-right {
+  display: block;
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+
+
+section.actions {
+  a {
+    display: block;
     width: 100%;
-    list-style: none;
-    li {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      position: relative;
-      a {
-        &:hover {
-          cursor: pointer;
-          color: lighten($action-color, 10%);
-          @include gradient(lighten($background, 10%), lighten($background, 15%));
-        }
-        display: block;
-        width: 100%;
-        border-bottom: 1px solid $background;
-        padding: 4px 4px 4px 24px;
-        @include gradient($background, lighten($background, 5%));
-        color: $action-color;
-        &.active {
-          color: lighten($action-color, 10%);
-          @include gradient(lighten($background, 10%), lighten($background, 15%));
-        }
-        &.duke {
-          border-color: $duke;
-        }
-        &.assassin {
-          border-color: $assassin;
-        }
-        &.ambassador {
-          border-color: $ambassador
-        }
-        &.captain {
-          border-color: $captain;
-        }
-        &.contessa {
-          border-color: $contessa;
-        }
-        .icon {
-          height: 20px;
-          width: 20px;
-          padding-right: 20px;
-          float: left;
-        }
-      }
+    border-bottom: 1px solid $background;
+    padding: 4px 4px 4px 24px;
+    color: $action-color;
+    @include gradient(lighten($background, 5%), $background);
+
+    &:hover {
+      cursor: pointer;
+      color: lighten($action-color, 10%);
+      @include gradient(lighten($background, 15%), lighten($background, 10%));
     }
+  }
+
+  .active {
+    color: lighten($action-color, 10%);
+    @include gradient(lighten($background, 15%), lighten($background, 10%));
+  }
+  .duke {
+    border-color: $duke;
+  }
+  .assassin {
+    border-color: $assassin;
+  }
+  .ambassador {
+    border-color: $ambassador
+  }
+  .captain {
+    border-color: $captain;
+  }
+  .contessa {
+    border-color: $contessa;
+  }
+  .icon {
+    height: 20px;
+    width: 20px;
+    padding-right: 20px;
+    float: left;
   }
 }
 
@@ -165,42 +193,35 @@ div.players {
 
 footer {
   position: fixed;
-  width: 100%;
   bottom: 0px;
   left: 0px;
   overflow: auto;
+}
 
-  .assets {
-    width: 100%;
+.assets {
+  .coins {
+    font-size: xx-large;
+  }
 
-    .coins {
-      font-size: xx-large;
-    }
-
-    .roles {
-      li {
-        padding: 6px;
-        display: inline-block;
-        &.duke {
-          @include gradient(darken($duke, 10%), darken($duke, 20%));
-        }
-        &.assassin {
-          @include gradient(darken($assassin, 10%), darken($assassin, 20%));
-        }
-        &.ambassador {
-          @include gradient(darken($ambassador, 10%), darken($ambassador, 20%));
-        }
-        &.captain {
-          @include gradient(darken($captain, 10%), darken($captain, 20%));
-        }
-        &.contessa {
-          @include gradient(darken($contessa, 10%), darken($contessa, 20%));
-        }
+  .roles {
+    li {
+      padding: 6px;
+      display: inline-block;
+      &.duke {
+        @include gradient(darken($duke, 10%), darken($duke, 20%));
+      }
+      &.assassin {
+        @include gradient(darken($assassin, 10%), darken($assassin, 20%));
+      }
+      &.ambassador {
+        @include gradient(darken($ambassador, 10%), darken($ambassador, 20%));
+      }
+      &.captain {
+        @include gradient(darken($captain, 10%), darken($captain, 20%));
+      }
+      &.contessa {
+        @include gradient(darken($contessa, 10%), darken($contessa, 20%));
       }
     }
   }
-}
-
-div.clear {
-  clear: both;
 }
