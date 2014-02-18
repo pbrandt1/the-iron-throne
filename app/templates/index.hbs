@@ -1,24 +1,33 @@
+{{!-- This is the action section, where we let people choose actions --}}
 <section class="actions">
-    <ul class="actions">
-        <li><a class="income" {{action 'clooseAction' 'income'}}>Income</a></li>
-        <li><a claas="foreign-aid">Foreign Aid</a></li>
-        <li><a class="coup">Coup</a></li>
-        <li><a class="char duke tax active"><span class="icon duke"></span>Tax</a></li>
-        <li><a class="char assassin assassinate"><span class="icon assassin"></span>Assassinate</a></li>
-        <li><a class="char ambassador exchange"><span class="icon ambassador"></span>Exchange</a></li>
-        <li><a class="char captain steal"><span class="icon captain"></span>Steal</a></li>
-    </ul>
-    <ul class="blocks">
-        <li><a class="block char duke foreign-aid"><span class="icon duke"></span>Block Foreign Aid</a></li>
-        <li><a class="block char ambassador steal"><span class="icon ambassador"></span>Block Stealing</a></li>
-        <li><a class="block char captain steal"><span class="icon captain"></span>Block Stealing</a></li>
-        <li><a class="block char contessa assassinate"><span class="icon contessa"></span>Block Assassination</a></li>
-    </ul>
+    {{#if OMGITSMYTURN}}
+        Your move.  Pick something, or LOSE A ROLE!!! 
+        <ul class="actions">
+            <li><a class="income" {{action 'clooseAction' 'income'}}>Income</a></li>
+            <li><a claas="foreign-aid">Foreign Aid</a></li>
+            <li><a class="coup">Coup</a></li>
+            <li><a class="char duke tax active"><span class="icon duke"></span>Tax</a></li>
+            <li><a class="char assassin assassinate"><span class="icon assassin"></span>Assassinate</a></li>
+            <li><a class="char ambassador exchange"><span class="icon ambassador"></span>Exchange</a></li>
+            <li><a class="char captain steal"><span class="icon captain"></span>Steal</a></li>
+        </ul>
+    {{/if}}
 </section>
 
+<section class="timer">
+    {{countdown-timer time=time visible=timerVisible status=timerStatus}}
+    {{#if ICANSTOPTHIS}}
+        {{button action='stopTimer'}}
+    {{/if}}
+</section>
 
-<section class="countdown">
-    <div class="display">{{timeleft}}</div>
-
-
+<section class="blocks">
+    {{#if chooseBlockingRole}}
+        <ul class="blocks">
+            <li><a class="block char duke foreign-aid"><span class="icon duke"></span>Block Foreign Aid</a></li>
+            <li><a class="block char ambassador steal"><span class="icon ambassador"></span>Block Stealing</a></li>
+            <li><a class="block char captain steal"><span class="icon captain"></span>Block Stealing</a></li>
+            <li><a class="block char contessa assassinate"><span class="icon contessa"></span>Block Assassination</a></li>
+        </ul>
+    {{/if}}
 </section>

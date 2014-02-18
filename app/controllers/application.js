@@ -4,7 +4,7 @@ import CONSTANTS from 'appkit/models/constants';
 
 export default Ember.ObjectController.extend({
 
-  debugging: true,
+  debugging: false,
 
   sharedState: SharedState.create({}),
   participants: [],
@@ -43,6 +43,7 @@ export default Ember.ObjectController.extend({
 
       var tempCoins = {};
       var tempCards = {};
+      var tempTurns = [];
       var deck = [];
       for (var i = 0; i < 15; i++) {
         deck.push(i%5);
@@ -56,6 +57,9 @@ export default Ember.ObjectController.extend({
         tempCards[p.id] = [];
         tempCards[p.id].push(deck.splice(Math.random()*deck.length|0, 1)[0]);
         tempCards[p.id].push(deck.splice(Math.random()*deck.length|0, 1)[0]);
+
+        // each player gets a turn!  (maybe)
+        tempTurns.push(p.id);
       });
 
       // the rest of the cards stay in the deck
@@ -63,11 +67,15 @@ export default Ember.ObjectController.extend({
 
       this.set('sharedState.coins', tempCoins);
       this.set('sharedState.cards', tempCards);
+      this.set('sharedState.turnOrder', tempTurns);
+      this.set('sharedState.currentPlayer', this.get('me'));
 
       gapi.hangout.data.submitDelta({
         coins: JSON.stringify(tempCoins),
         cards: JSON.stringify(tempCards),
-        state: JSON.stringify(this.get('sharedState.state'))
+        state: JSON.stringify(this.get('sharedState.state')),
+        turnOrder: JSON.stringify(tempTurns),
+        currentPlayer: JSON.stringify(this.get('me'))
       });
 
     }
