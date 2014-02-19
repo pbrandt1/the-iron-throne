@@ -8,7 +8,9 @@ export default Ember.ObjectController.extend({
   OMGITSMYTURN: function() {
     // really it's only your turn
     return this.get('me') && this.get('sharedState.currentPlayer')
-      && this.get('me').toString() === this.get('sharedState.currentPlayer').toString();
+      && this.get('me').toString() === this.get('sharedState.currentPlayer').toString()
+      && this.get('sharedState.state') === CONSTANTS.STATE.ChoosingAction
+      && this.get('sharedState.phase') === CONSTANTS.PHASE.Action;
   }.property('me', 'sharedState.currentPlayer', 'sharedState.phase', 'sharedState.state'),
 
   enableCountdown: function() {
@@ -19,10 +21,26 @@ export default Ember.ObjectController.extend({
   timeleft: 5,
 
   actions: {
-    chooseAction: function(action) {
-      // send updates over wire
-
-      // update ui
+    chooseAction: function(actionKey) {
+      if (this.get('OMGITSMYTURN')) {
+        this.set('sharedState.state', CONSTANTS.STATE.WaitingForInterrupt);
+        this.set('sharedState.phase', CONSTANTS.PHASE.ActionChallenge);
+        this.set('sharedState.action.playerId', this.get('me.id'));
+        this.set('sharedState.action.action', CONSTANTS.ACTIONS[actionKey]);
+      } else {
+        console.log('attempted to set an action when you just can\'t.');
+      }
+    },
+    chooseBlock: function(blockKey) {
+      if (!this.get('OMGITSMYTURN')
+        && this.get('sharedState.phase') === CONSTANTS.PHASE.Block
+        && this.get('sharedState.state') === CONSTANTS.STATE.WaitingForInterrupt) {
+        this.set('sharedState.state', CONSTANTS.STATE.EffectSummary);
+        this.set('counterAction.playerId', this.get('me.id'));
+        this.set('counterAction.counterAction', CONSTANTS.COUNTERACTIONS[blockKey]);
+      } else {
+        console.log('attempted to set an action when you just can\'t.');
+      }
 
     },
     feedClock: function() {
