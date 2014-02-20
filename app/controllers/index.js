@@ -96,7 +96,6 @@ export default Ember.ObjectController.extend({
 
   actions: {
     chooseAction: function(actionKey) {
-			debugger;
       if (this.get('OMGITSMYTURN')) {
         this.set('sharedState.state', CONSTANTS.STATE.WaitingForInterrupt);
         this.set('sharedState.phase', CONSTANTS.PHASE.ActionChallenge);

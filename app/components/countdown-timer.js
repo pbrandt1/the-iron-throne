@@ -11,7 +11,6 @@ export default Ember.Component.extend({
 	}.property('time', 'interval'),
 
 	tick: function() {
-		debugger;
 		var _ = this;
 
 		if (this.get('isTicking')) {
@@ -23,8 +22,13 @@ export default Ember.Component.extend({
 			}, 1000);
 			this.set('interval', interval);
 		} else {
+			// The clock hit zero!
 			// kill the interval
+			clearInterval(this.get('interval'));
 			this.set('interval', null);
 		}
-	}.observes('isTicking')
+	}.observes('time')
+
+
+
 });
