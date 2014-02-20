@@ -31,6 +31,18 @@ export default Ember.ObjectController.extend({
   }.property('itsMyRound', 'sharedState.phase', 'sharedState.state'),
 
 	/**
+	 * Have seen the end, and it is NEAR.  BUT I CAN STOP THIS HORRIBLE FATE FROM PASSING.
+	 * @constructor
+	 */
+	ICANSTOPTHIS: function() {
+		return this.get('sharedState.state') === CONSTANTS.STATE.WaitingForInterrupt &&
+			// can't challenge your own action
+			!(this.get('itsMyRound') && this.get('sharedState.phase') === CONSTANTS.PHASE.ActionChallenge) &&
+			// can't block own action
+			!(this.get('itsMyRound') && this.get('sharedState.phase') === CONSTANTS.PHASE.Block);
+	}.property('sharedState.state', 'sharedState.phase', 'itsMyRound'),
+
+	/**
 	 * Something has triggered the countdown timer
 	 *  - I must choose an action
 	 *  - There is an opportunity to challenge someone
@@ -43,7 +55,7 @@ export default Ember.ObjectController.extend({
 	/**
 	 * Time left on the countdown timer in seconds
 	 */
-  timeleft: 5,
+  timeLeft: 0,
 
 	/**
 	 * Peeps gotta know what's up in the game
@@ -84,11 +96,13 @@ export default Ember.ObjectController.extend({
 
   actions: {
     chooseAction: function(actionKey) {
+			debugger;
       if (this.get('OMGITSMYTURN')) {
         this.set('sharedState.state', CONSTANTS.STATE.WaitingForInterrupt);
         this.set('sharedState.phase', CONSTANTS.PHASE.ActionChallenge);
         this.set('sharedState.action.playerId', this.get('me.id'));
         this.set('sharedState.action.action', CONSTANTS.ACTIONS[actionKey]);
+				this.set('timeLeft', 5);
       } else {
         console.log('attempted to set an action when you just can\'t.');
       }
@@ -101,15 +115,13 @@ export default Ember.ObjectController.extend({
         this.set('sharedState.state', CONSTANTS.STATE.EffectSummary);
         this.set('block.playerId', this.get('me.id'));
         this.set('block.block', CONSTANTS.BLOCKS[blockKey]);
+				this.set('timeLeft', 5);
       } else {
         console.log('attempted to set an action when you just can\'t.');
       }
 
     },
-    feedClock: function() {
-      // send update to gapi
-
-      // update my clock
+    wait: function() {
     }
   }
 });

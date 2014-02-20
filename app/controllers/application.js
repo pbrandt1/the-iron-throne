@@ -4,7 +4,7 @@ import CONSTANTS from 'appkit/models/constants';
 
 export default Ember.ObjectController.extend({
 
-  debugging: false,
+  debugging: true,
 
   sharedState: SharedState.create({}),
   participants: [],

@@ -25,9 +25,9 @@
 </section>
 
 <section class="timer">
-    {{countdown-timer time=time visible=timerVisible status=timerStatus}}
+    {{countdown-timer time=timeLeft visible=enableCountdown }}
     {{#if ICANSTOPTHIS}}
-        {{button action='stopTimer'}}
+        <button {{action 'wait'}}>Wait!</button>
     {{/if}}
 </section>
 
