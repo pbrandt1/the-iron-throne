@@ -39,7 +39,6 @@ export default Ember.ObjectController.extend({
 
   actions: {
     start: function() {
-      this.set('sharedState.state', CONSTANTS.STATE.ChoosingAction);
 
       var tempCoins = {};
       var tempCards = {};
@@ -67,17 +66,22 @@ export default Ember.ObjectController.extend({
 
       this.set('sharedState.coins', tempCoins);
       this.set('sharedState.cards', tempCards);
-      this.set('sharedState.turnOrder', tempTurns);
-      this.set('sharedState.currentPlayer', this.get('me'));
+			this.set('sharedState.state', CONSTANTS.STATE.ChoosingAction);
+			this.set('sharedState.phase', CONSTANTS.PHASE.Action);
+			this.set('sharedState.turnOrder', tempTurns);
+      this.set('sharedState.currentPlayer', this.get('me.id'));
 
+			/**
+			 * All values must be strings (watch out for numbers, they'll get you!!)
+			 */
       gapi.hangout.data.submitDelta({
         coins: JSON.stringify(tempCoins),
         cards: JSON.stringify(tempCards),
         state: JSON.stringify(this.get('sharedState.state')),
+				phase: JSON.stringify(this.get('sharedState.phase')),
         turnOrder: JSON.stringify(tempTurns),
-        currentPlayer: JSON.stringify(this.get('me'))
+        currentPlayer: JSON.stringify(this.get('me.id'))
       });
-
     }
   },
 
@@ -95,8 +99,7 @@ export default Ember.ObjectController.extend({
       // As each key of the state hashed is presented, simply update the model accordingly.
       // For complex properties like players, you have to JSON.parse it and set it that way.
       event.addedKeys.forEach(function(key){
-        var value = typeof _.get('sharedState')[key.key] === 'string' ? key.value : JSON.parse(key.value);
-        _.sharedState.set(key.key, value);
+        _.sharedState.set(key.key, JSON.parse(key.value));
       });
 
       // I don't think i'm going to have to deal with removed keys
@@ -114,7 +117,13 @@ export default Ember.ObjectController.extend({
       _.participants.pushObject(Participant.create(p));
     });
 
-
+		// the above doesn't seem to be working?  I'm enabled=false??
+		// So let's add ALL the participants!
+		gapi.hangout.getParticipants().forEach(function(p) {
+			if (!_.participants.findBy('person.id', p.person.id)) {
+				_.participants.pushObject(Participant.create(p));
+			}
+		});
     /**
      * Add players when a participant opens the app
      */

@@ -54,40 +54,47 @@ CONSTANTS.PHASE = {
  */
 CONSTANTS.ACTIONS = {
   Income: {
+		display: 'Income',
     role: 0,
     id: 1,
     cost: 0,
     reward: 1
   },
   ForeignAid: {
+		display: 'Foreign Aid',
     role: 0,
     id: 2,
     cost: 0,
     reward: 2
   },
   Coup: {
+		display: 'Coup',
     role: 0,
     id: 3,
     cost: 7,
     assassinate: true
   },
   Tax: {
+		display: 'Tax',
     role: CONSTANTS.ROLE.Duke,
     id: 4,
     reward: 3
   },
   Assassinate: {
+		display: 'Assassinate',
     role: CONSTANTS.ROLE.Assassin,
     id: 5,
     cost: 3,
     assassinate: true
   },
   Exchange: {
+		display: 'Exchange',
     role: CONSTANTS.ROLE.Ambassador,
     id: 6,
     exchange: true
   },
   Steal: {
+		display: 'Steal',
     role: CONSTANTS.ROLE.Captain,
     id: 7,
     steal: 2
@@ -95,9 +102,9 @@ CONSTANTS.ACTIONS = {
 };
 
 /**
- * Available counteractions
+ * Available blocks
  */
-CONSTANTS.COUNTERACTIONS = {
+CONSTANTS.BLOCKS = {
   BlockForeignAid: {
     role: 1,
     action: CONSTANTS.ACTIONS.ForeignAid.id

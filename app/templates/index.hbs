@@ -1,3 +1,13 @@
+<section class="messages">
+    {{#if actionText}}
+        <div>{{actionText}}</div>
+    {{/if}}
+    {{#if blockText}}
+        <div>{{blockText}}</div>
+    {{/if}}
+</section>
+
+
 {{!-- This is the action section, where we let people choose actions --}}
 <section class="actions">
     {{#if OMGITSMYTURN}}
