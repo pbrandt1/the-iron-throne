@@ -107,23 +107,20 @@ export default Ember.ObjectController.extend({
         // so coool
       });
     });
-
     /**
      * Init the participants
      */
     gapi.hangout.getEnabledParticipants().forEach(function(p) {
-      console.log('peter');
-      console.log(JSON.stringify(p));
       _.participants.pushObject(Participant.create(p));
     });
 
-		// the above doesn't seem to be working?  I'm enabled=false??
-		// So let's add ALL the participants!
-		gapi.hangout.getParticipants().forEach(function(p) {
-			if (!_.participants.findBy('person.id', p.person.id)) {
-				_.participants.pushObject(Participant.create(p));
-			}
-		});
+		// Consider maintaining a list of all participants and then just flag if they are in the game?
+		//gapi.hangout.getParticipants().forEach(function(p) {
+		//	if (!_.participants.findBy('person.id', p.person.id)) {
+		//		_.participants.pushObject(Participant.create(p));
+		//	}
+		//});
+
     /**
      * Add players when a participant opens the app
      */
@@ -146,11 +143,8 @@ export default Ember.ObjectController.extend({
       });
     });
 
-    /**
-     * Finally, perform things after onready is totes set up
-     */
-    gapi.hangout.onApiReady.add(function() {
-      _.set('me', gapi.hangout.getLocalParticipant());
-    });
+    //set me to hangout user
+    _.set('me', gapi.hangout.getLocalParticipant());
+    
   }
 });
