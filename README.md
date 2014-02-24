@@ -35,6 +35,14 @@ A players turn goes like this
 * Can block Assassinate
 
 
+## Setup
+* git clone repo
+* npm install
+* get hangout developer api activated and point it the correct .xml file
+* visit http://hangouts.google.com/start
+* add developer app
+* success!
+
 ## Teh Codez
 A google hangout has a shared state, which means there is NO central server, but one client is crowned as “master.”  The master peer will setup the initial state of the game, but provides no other functions (note that in the final implementation, a master may not be necessary).
 
