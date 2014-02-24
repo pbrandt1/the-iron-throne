@@ -3,16 +3,8 @@
     <p class="subtitle">In the game of thrones, you either win or you die.</p>
 </header>
 {{#if debugging}}
-{{sharedState.state}}
-{{sharedState.phase}}
-{{sharedState.currentPlayer}}
-
-{{sharedState.action}}
-{{sharedState.block}}
-
-{{participants.length}}
-{{me.id}}
-    <button {{action 'start'}}>Restart</button>
+{{debug-panel sharedState=sharedState me=me participants=participants}}
+<button {{action 'start'}}>Restart</button>
 {{/if}}
 
 {{#if isStarted}}
