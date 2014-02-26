@@ -14,7 +14,7 @@ from
 export default
 Ember.ObjectController.extend({
 
-  debugging: true,
+  debugging: false,
 
   sharedState: SharedState.create({}),
   participants: [],
@@ -47,53 +47,6 @@ Ember.ObjectController.extend({
     return [];
   }.property('sharedState.cards').cacheable(),
 
-  actions: {
-    start: function () {
-
-      var tempCoins = {};
-      var tempCards = {};
-      var tempTurns = [];
-      var deck = [];
-      for (var i = 0; i < 15; i++) {
-        deck.push(i % 5);
-      }
-
-      this.get('participants').forEach(function (p) {
-        // each player gets three coins
-        tempCoins[p.id] = 3;
-
-        // each player gets two cards
-        tempCards[p.id] = [];
-        tempCards[p.id].push(deck.splice(Math.random() * deck.length | 0, 1)[0]);
-        tempCards[p.id].push(deck.splice(Math.random() * deck.length | 0, 1)[0]);
-
-        // each player gets a turn!  (maybe)
-        tempTurns.push(p.id);
-      });
-
-      // the rest of the cards stay in the deck
-      tempCards.deck = deck;
-
-      this.set('sharedState.coins', tempCoins);
-      this.set('sharedState.cards', tempCards);
-      this.set('sharedState.state', CONSTANTS.STATE.ChoosingAction);
-      this.set('sharedState.phase', CONSTANTS.PHASE.Action);
-      this.set('sharedState.turnOrder', tempTurns);
-      this.set('sharedState.currentPlayer', this.get('me.id'));
-
-      /**
-       * All values must be strings (watch out for numbers, they'll get you!!)
-       */
-      gapi.hangout.data.submitDelta({
-        coins: JSON.stringify(tempCoins),
-        cards: JSON.stringify(tempCards),
-        state: JSON.stringify(this.get('sharedState.state')),
-        phase: JSON.stringify(this.get('sharedState.phase')),
-        turnOrder: JSON.stringify(tempTurns),
-        currentPlayer: JSON.stringify(this.get('me.id'))
-      });
-    }
-  },
 
 
   /**

@@ -8,15 +8,16 @@
     <button {{action 'start'}}>Restart</button>
 {{/if}}
 
-{{#if isStarted}}
-    {{outlet}}
-{{else}}
-    <section class="new-game">
-        <div>
-            <button {{action 'start'}}>Start Game</button>
-        </div>
-    </section>
-{{/if}}
+<section class="messages">
+    {{#if actionText}}
+        <div>{{actionText}}</div>
+    {{/if}}
+    {{#if blockText}}
+        <div>{{blockText}}</div>
+    {{/if}}
+</section>
+
+{{outlet}}
 
 <section class="players">
     <ul>
