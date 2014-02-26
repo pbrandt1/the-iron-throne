@@ -1,26 +1,28 @@
 <header>
     <h1 id='title'>The Iron Throne</h1>
+
     <p class="subtitle">In the game of thrones, you either win or you die.</p>
 </header>
 {{#if debugging}}
-{{debug-panel sharedState=sharedState me=me participants=participants}}
-<button {{action 'start'}}>Restart</button>
+    {{debug-panel sharedState=sharedState me=me participants=participants}}
+    <button {{action 'start'}}>Restart</button>
 {{/if}}
 
 {{#if isStarted}}
-  {{outlet}}
+    {{outlet}}
 {{else}}
-  <section class="new-game">
-      <div>
-          <button {{action 'start'}}>Start Game</button>
-      </div>
-  </section>
+    <section class="new-game">
+        <div>
+            <button {{action 'start'}}>Start Game</button>
+        </div>
+    </section>
 {{/if}}
 
 <section class="players">
     <ul>
         {{#each game.players}}
-            <li>{{person.displayName}}<span class="coins">{{coins}}</span><span class="roles">{{roles.length}}</span></li>
+            <li>{{person.displayName}}<span class="coins">{{coins}}</span><span class="roles">{{roles.length}}</span>
+            </li>
         {{/each}}
     </ul>
 </section>
@@ -33,7 +35,7 @@
         <div class="roles pull-right">
             <ul class="roles list--inline">
                 {{#each myRoles}}
-                  <li>{{name}}</li>
+                    <li>{{name}}</li>
                 {{/each}}
             </ul>
         </div>

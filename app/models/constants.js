@@ -1,20 +1,19 @@
-
 var CONSTANTS = {};
 /**
  * Court roles
  */
-CONSTANTS.ROLE= {
-    Duke: 1,
-    Assassin: 2,
-    Ambassador: 3,
-    Captain: 4,
-    Contessa: 5
+CONSTANTS.ROLE = {
+  Duke: 1,
+  Assassin: 2,
+  Ambassador: 3,
+  Captain: 4,
+  Contessa: 5
 };
 
 /**
  * Court roles redux
  */
-CONSTANTS.ROLE_INVERSE= {
+CONSTANTS.ROLE_INVERSE = {
   1: 'Duke',
   2: 'Assassin',
   3: 'Ambassador',
@@ -54,47 +53,47 @@ CONSTANTS.PHASE = {
  */
 CONSTANTS.ACTIONS = {
   Income: {
-		display: 'Income',
+    display: 'Income',
     role: 0,
     id: 1,
     cost: 0,
     reward: 1
   },
   ForeignAid: {
-		display: 'Foreign Aid',
+    display: 'Foreign Aid',
     role: 0,
     id: 2,
     cost: 0,
     reward: 2
   },
   Coup: {
-		display: 'Coup',
+    display: 'Coup',
     role: 0,
     id: 3,
     cost: 7,
     assassinate: true
   },
   Tax: {
-		display: 'Tax',
+    display: 'Tax',
     role: CONSTANTS.ROLE.Duke,
     id: 4,
     reward: 3
   },
   Assassinate: {
-		display: 'Assassinate',
+    display: 'Assassinate',
     role: CONSTANTS.ROLE.Assassin,
     id: 5,
     cost: 3,
     assassinate: true
   },
   Exchange: {
-		display: 'Exchange',
+    display: 'Exchange',
     role: CONSTANTS.ROLE.Ambassador,
     id: 6,
     exchange: true
   },
   Steal: {
-		display: 'Steal',
+    display: 'Steal',
     role: CONSTANTS.ROLE.Captain,
     id: 7,
     steal: 2
@@ -124,4 +123,5 @@ CONSTANTS.BLOCKS = {
 };
 
 
-export default CONSTANTS;
+export default
+CONSTANTS;

@@ -5,4 +5,5 @@ var Player = Ember.Object.extend({
   roles: []
 });
 
-export default Player;
+export default
+Player;

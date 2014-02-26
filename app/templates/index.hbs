@@ -11,15 +11,19 @@
 {{!-- This is the action section, where we let people choose actions --}}
 <section class="actions">
     {{#if OMGITSMYTURN}}
-        Your move.  Pick something, or LOSE A ROLE!!! 
+        Your move. Pick something, or LOSE A ROLE!!!
         <ul class="actions">
             <li><a class="income" {{action 'chooseAction' 'Income'}}>Income</a></li>
             <li><a class="foreign-aid" {{action 'chooseAction' 'ForeignAid'}}>Foreign Aid</a></li>
             <li><a class="coup" {{action 'chooseAction' 'Coup'}}>Coup</a></li>
-            <li><a class="char duke tax active" {{action 'chooseAction' 'Tax'}}><span class="icon duke"></span>Tax</a></li>
-            <li><a class="char assassin assassinate" {{action 'chooseAction' 'Assassinate'}}><span class="icon assassin"></span>Assassinate</a></li>
-            <li><a class="char ambassador exchange" {{action 'chooseAction' 'Exchange'}}><span class="icon ambassador"></span>Exchange</a></li>
-            <li><a class="char captain steal" {{action 'chooseAction' 'Steal'}}><span class="icon captain"></span>Steal</a></li>
+            <li><a class="char duke tax active" {{action 'chooseAction' 'Tax'}}><span class="icon duke"></span>Tax</a>
+            </li>
+            <li><a class="char assassin assassinate" {{action 'chooseAction' 'Assassinate'}}><span
+                    class="icon assassin"></span>Assassinate</a></li>
+            <li><a class="char ambassador exchange" {{action 'chooseAction' 'Exchange'}}><span
+                    class="icon ambassador"></span>Exchange</a></li>
+            <li><a class="char captain steal" {{action 'chooseAction' 'Steal'}}><span class="icon captain"></span>Steal</a>
+            </li>
         </ul>
     {{/if}}
 </section>
@@ -34,10 +38,14 @@
 <section class="blocks">
     {{#if chooseBlockingRole}}
         <ul class="blocks">
-            <li><a class="block char duke foreign-aid" {{action 'chooseBlock' 'BlockForeignAid'}}><span class="icon duke"></span>Block Foreign Aid</a></li>
-            <li><a class="block char ambassador steal" {{action 'chooseBlock' 'BlockStealingA'}}><span class="icon ambassador"></span>Block Stealing</a></li>
-            <li><a class="block char captain steal" {{action 'chooseBlock' 'BlockStealingC'}}><span class="icon captain"></span>Block Stealing</a></li>
-            <li><a class="block char contessa assassinate" {{action 'chooseBlock' 'BlockAssassination'}}><span class="icon contessa"></span>Block Assassination</a></li>
+            <li><a class="block char duke foreign-aid" {{action 'chooseBlock' 'BlockForeignAid'}}><span
+                    class="icon duke"></span>Block Foreign Aid</a></li>
+            <li><a class="block char ambassador steal" {{action 'chooseBlock' 'BlockStealingA'}}><span
+                    class="icon ambassador"></span>Block Stealing</a></li>
+            <li><a class="block char captain steal" {{action 'chooseBlock' 'BlockStealingC'}}><span
+                    class="icon captain"></span>Block Stealing</a></li>
+            <li><a class="block char contessa assassinate" {{action 'chooseBlock' 'BlockAssassination'}}><span
+                    class="icon contessa"></span>Block Assassination</a></li>
         </ul>
     {{/if}}
 </section>

@@ -9,12 +9,10 @@ $ambassador: #999100;
 $captain: #076273;
 $contessa: #900007;
 
-
 $action-color: #b0998d;
 
 $button-color: $text-color;
 $button-text-color: $background;
-
 
 @mixin gradient($from, $to) {
   /* fallback/image non-cover color */
@@ -81,8 +79,6 @@ section, header, footer {
 .clear {
   clear: both;
 }
-
-
 
 section.actions {
   a {
@@ -152,7 +148,6 @@ section.actions {
   }
 }
 
-
 /* button styles */
 button {
   border: none;
@@ -170,7 +165,7 @@ button {
     cursor: pointer;
   }
   &:disabled {
-    display:none;
+    display: none;
   }
 }
 
@@ -189,7 +184,6 @@ div.players {
     }
   }
 }
-
 
 footer {
   position: fixed;

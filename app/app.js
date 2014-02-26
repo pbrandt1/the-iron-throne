@@ -1,4 +1,7 @@
-import Resolver from 'resolver';
+import
+Resolver
+from
+'resolver';
 
 var App = Ember.Application.extend({
   LOG_ACTIVE_GENERATION: true,
@@ -10,4 +13,5 @@ var App = Ember.Application.extend({
   Resolver: Resolver['default']
 });
 
-export default App;
+export default
+App;

@@ -1,15 +1,21 @@
-import Player from 'appkit/models/player';
-import CONSTANTS from 'appkit/models/constants';
+import
+Player
+from
+'appkit/models/player';
+import
+CONSTANTS
+from
+'appkit/models/constants';
 
 
 /**
  * Creates the deck of roles.  Each roles is just an
  * @returns {*|Ember.NativeArray}
  */
-var createDeck = function() {
+var createDeck = function () {
   var deck = Em.A([]);
   for (var i = 0; i < 15; i++) {
-    deck.pushObject({role: i%5, owner: null});
+    deck.pushObject({role: i % 5, owner: null});
   }
   return deck;
 };
@@ -17,7 +23,7 @@ var createDeck = function() {
 /**
  * Gets my id from the gapi stuff
  */
-var whoAmI = function() {
+var whoAmI = function () {
   return 'nobody';
 };
 
@@ -38,23 +44,23 @@ var Game = Ember.Object.extend({
   /**
    * Create new game.  Note that the last winner is the current leader and will do this whole damn thing.
    */
-  newGame: function() {
+  newGame: function () {
     var _ = this;
 
     // give each player 3 coins
-    this.players.forEach(function(p) {
+    this.players.forEach(function (p) {
       p.set('coins', 3);
     });
 
     // assign role cards
     this.set('deck', createDeck());
-    this.players.forEach(function(p) {
+    this.players.forEach(function (p) {
       p.roles.clear();
-      var i = Math.random()* _.deck.length|0;
-      p.roles.pushObject(_.deck.splice(i,1)[0]);
+      var i = Math.random() * _.deck.length | 0;
+      p.roles.pushObject(_.deck.splice(i, 1)[0]);
 
-      i = Math.random()* _.deck.length|0;
-      p.roles.pushObject(_.deck.splice(i,1)[0]);
+      i = Math.random() * _.deck.length | 0;
+      p.roles.pushObject(_.deck.splice(i, 1)[0]);
     });
 
     // set the game state and phse
@@ -67,4 +73,5 @@ var Game = Ember.Object.extend({
   }
 });
 
-export default Game;
+export default
+Game;

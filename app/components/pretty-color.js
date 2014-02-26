@@ -1,7 +1,8 @@
-export default Ember.Component.extend({
+export default
+Ember.Component.extend({
   classNames: ['pretty-color'],
   attributeBindings: ['style'],
-  style: function(){
+  style: function () {
     return 'color: ' + this.get('name') + ';';
   }.property('name')
 });
