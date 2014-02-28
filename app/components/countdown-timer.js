@@ -16,7 +16,8 @@ Ember.Component.extend({
         this.decrementProperty('time');
       }, 1000);
     } else {
-      // The clock hit zero!
+      // The clock hit zero!\
+			this.sendAction('onTimeEnd');
     }
   }.observes('time'),
 

@@ -20,7 +20,11 @@ export default Ember.ObjectController.extend({
       this.set('sharedState.action.action', CONSTANTS.ACTIONS[actionKey]);
 
       this.transitionToRoute('wait', {time: 10});
-    }
+    },
+		onTimeEnd: function() {
+			// You blew it!  A role is randomly discarded and you lose your turn
+
+		}
   }
 
 });

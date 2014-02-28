@@ -18,6 +18,15 @@ export default Ember.ObjectController.extend({
     } else {
       return 'Waiting on everybody else to determine your fate';
     }
-  }.property('player')
+  }.property('player'),
+
+	actions: {
+		/**
+		 * This is what happens when the clock hits zero
+		 */
+		onTimeEnd: function() {
+
+		}
+	}
 
 });
