@@ -1,7 +1,4 @@
-import
-CONSTANTS
-from
-'appkit/models/constants';
+import CONSTANTS from 'appkit/models/constants';
 
 var SharedState = Ember.Object.extend({
   state: CONSTANTS.STATE.NotStarted,
@@ -12,16 +9,11 @@ var SharedState = Ember.Object.extend({
   coins: {}, // object key=playerId, value=coins
   action: {}, // {playerId, action}
   block: {}, // {playerId, block}
-  syncClock: {}, // {playerId, secondsLeft}
+  syncClock: {} // {playerId, secondsLeft}
   // when a challenge is being discussed, we need to be able to sync the countdown clocks
 
-  initGame: function (participants) {
-    var _ = this;
-
-  }
 
 
 });
 
-export default
-SharedState;
+export default SharedState;

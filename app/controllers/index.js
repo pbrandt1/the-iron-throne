@@ -1,15 +1,10 @@
-import
-CONSTANTS
-from
-'appkit/models/constants';
-
+import CONSTANTS from 'appkit/models/constants';
 import ActionMixin from 'appkit/mixins/action-mixin';
+import SharedStateMixin from 'appkit/mixins/shared-state';
 
-export default
-Ember.ObjectController.extend(ActionMixin, {
+export default Ember.ObjectController.extend(ActionMixin, SharedStateMixin, {
 
   needs: 'application',
-  sharedState: Ember.computed.alias('controllers.application.sharedState'),
   participants: Ember.computed.alias('controllers.application.participants'),
   me: Ember.computed.alias('controllers.application.me'),
 
@@ -129,26 +124,16 @@ Ember.ObjectController.extend(ActionMixin, {
       // the rest of the cards stay in the deck
       tempCards.deck = deck;
 
-      this.set('sharedState.coins', tempCoins);
-      this.set('sharedState.cards', tempCards);
-      this.set('sharedState.state', CONSTANTS.STATE.ChoosingAction);
-      this.set('sharedState.phase', CONSTANTS.PHASE.Action);
-      this.set('sharedState.turnOrder', tempTurns);
-      this.set('sharedState.currentPlayer', this.get('me.id'));
+      this.setProperties({
+				'sharedState.coins': tempCoins, 
+				'sharedState.cards': tempCards,
+				'sharedState.state': CONSTANTS.STATE.ChoosingAction,
+				'sharedState.phase': CONSTANTS.PHASE.Action,
+				'sharedState.turnOrder': tempTurns,
+				'sharedState.currentPlayer': this.get('me.id')
+			});
 
       this.transitionToRoute('action');
-
-      /**
-       * All values must be strings (watch out for numbers, they'll get you!!)
-       */
-      gapi.hangout.data.submitDelta({
-        coins: JSON.stringify(tempCoins),
-        cards: JSON.stringify(tempCards),
-        state: JSON.stringify(this.get('sharedState.state')),
-        phase: JSON.stringify(this.get('sharedState.phase')),
-        turnOrder: JSON.stringify(tempTurns),
-        currentPlayer: JSON.stringify(this.get('me.id'))
-      });
     }
   }
 

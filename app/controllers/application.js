@@ -1,22 +1,12 @@
-import
-SharedState
-from
-'appkit/models/sharedState';
-import
-Participant
-from
-'appkit/models/participant';
-import
-CONSTANTS
-from
-'appkit/models/constants';
+import Participant from 'appkit/models/participant';
+import CONSTANTS from 'appkit/models/constants';
+import SharedStateMixin from 'appkit/mixins/shared-state';
 
 export default
-Ember.ObjectController.extend({
+Ember.ObjectController.extend(SharedStateMixin, {
 
   debugging: false,
 
-  sharedState: SharedState.create({}),
   participants: [],
   me: null,
 
@@ -50,25 +40,10 @@ Ember.ObjectController.extend({
 
 
   /**
-   * Set up listeners with gapi
+   * Set up listeners with gapi for participants
    */
   init: function () {
     var _ = this;
-    /**
-     * Handle shared-state changes.  Shared state is everything in the Game model, including players.
-     */
-    gapi.hangout.data.onStateChanged.add(function (event) {
-      // As each key of the state hashed is presented, simply update the model accordingly.
-      // For complex properties like players, you have to JSON.parse it and set it that way.
-      event.addedKeys.forEach(function (key) {
-        _.sharedState.set(key.key, JSON.parse(key.value));
-      });
-
-      // I don't think i'm going to have to deal with removed keys
-      event.removedKeys.forEach(function (key) {
-        // so coool
-      });
-    });
     /**
      * Init the participants
      */
