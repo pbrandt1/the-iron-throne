@@ -1,9 +1,10 @@
 import Participant from 'appkit/models/participant';
 import CONSTANTS from 'appkit/models/constants';
 import SharedStateMixin from 'appkit/mixins/shared-state';
+import NavigationMixin from 'appkit/mixins/navigation';
 
 export default
-Ember.ObjectController.extend(SharedStateMixin, {
+Ember.ObjectController.extend(SharedStateMixin, NavigationMixin, {
 
   debugging: false,
 
